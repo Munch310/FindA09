@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
 
+    public GameObject firstCard;
+    public GameObject secondCard;
     public static GameManager Instance()
     {
         if(!instance)
@@ -26,5 +28,10 @@ public class GameManager : MonoBehaviour
 
         if(instance != this)
             Destroy(gameObject);
+    }
+
+    public void IsMatched()
+    {
+
     }
 }
