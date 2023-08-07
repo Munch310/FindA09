@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StageBtn : MonoBehaviour
+public class ReturnMainBtn : MonoBehaviour
 {
     public GameObject StageSelect;
 
