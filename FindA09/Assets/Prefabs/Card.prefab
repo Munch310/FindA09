@@ -371,14 +371,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2247238943116812300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5fc5c5f155acf5498eee272cba3f430, type: 3}
+  m_Script: {fileID: 11500000, guid: cb3ceea549ffa1b448f5419b8946e060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cardIndex: -1
   _front: {fileID: 3227332621274941270}
-  _frontImage: {fileID: 7494235367408772689}
+  _frontImage: {fileID: 0}
   _back: {fileID: 2245298663131804846}
-  _backImage: {fileID: 3789055082315698574}
+  _backImage: {fileID: 0}
   _animator: {fileID: 6163806206524681032}
 --- !u!95 &6163806206524681032
 Animator:
@@ -390,7 +390,7 @@ Animator:
   m_GameObject: {fileID: 2247238943116812300}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bd690e0894974b84d84d4158b6895852, type: 2}
+  m_Controller: {fileID: 9100000, guid: d77455ca4bd7fcc48833b06ef5af764e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
