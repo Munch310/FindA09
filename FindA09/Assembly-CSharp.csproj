@@ -64,7 +64,6 @@
     <Compile Include="Assets\Scripts\startBtn.cs" />
     <Compile Include="Assets\Scripts\SafeArea.cs" />
     <Compile Include="Assets\Scripts\CardData\CardScriptable.cs" />
-    <Compile Include="Assets\Scripts\TitleBtn.cs" />
     <Compile Include="Assets\Scripts\stageBtn.cs" />
     <Compile Include="Assets\Scripts\StageLoader.cs" />
     <Compile Include="Assets\Scripts\ReturnMainBtn.cs" />
