@@ -6,9 +6,17 @@ using UnityEngine;
 public class CardScriptable : ScriptableObject 
 {
 
-    public int      _index;
-    public string   _cardName;
-    public string   _desc;
-    public Sprite   _sprite;
+    [System.Serializable]
+    public struct DATA
+    {
+        public int         _index;
+        public string      _cardName;
+        public string      _desc;
+        public Sprite      _sprite;
+
+        int test;
+    }
+
+    [SerializeField] public DATA[] array = null;
 
 }
