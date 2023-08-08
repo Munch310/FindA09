@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52290aa07c38d8844a3779eb56a5a8a8, type: 3}
-  m_Name: CardScriptable
+  m_Script: {fileID: 11500000, guid: 7d1daf0f1486e1846a7c3a8415394ede, type: 3}
+  m_Name: CardScriptable0
   m_EditorClassIdentifier: 
-  _cardName: 
-  _desc: 
-  _sprite: {fileID: 0}
+  _index: 0
+  _cardName: Card0
+  _desc: Test0
+  _sprite: {fileID: 21300000, guid: 031c3a997205ba64b9d41145be66d848, type: 3}

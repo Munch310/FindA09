@@ -109,10 +109,12 @@ public class Card : MonoBehaviour
     private void UpdateCardIndex()
     {
 
+        Debug.Log(_cardIndex);
+        Debug.Assert(GameManager.Instance().IsAvailableCardIndex(_cardIndex));
+
         var frontImage      = _frontImage.GetComponent<Image>();
-        frontImage.color    = Color.red;
-        //Debug.Assert(frontImage.sprite != null);
-        Debug.Log("GameManager에서 적합한 함수를 호출하도록 변경하세요.");
+        frontImage.sprite   = GameManager.Instance().cardScriptableArray[_cardIndex]._sprite;
+        Debug.Assert(frontImage.sprite != null);
         
     }
 

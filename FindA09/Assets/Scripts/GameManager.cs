@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     public GameObject _stage2;
     public GameObject _stage3;
     public int _currentStage = 1;
+
+    public CardScriptable[] _cardScriptableArray = null;
     
     int _maxCardCount = 12;
 
@@ -33,6 +35,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject _gameOverUI;
 
+
+    public CardScriptable[] cardScriptableArray { get { return _cardScriptableArray; } }
+
+    public int cardIndexNumber { get { return _maxCardCount / 2; } }            //카드 인덱스의 종류
 
     public static GameManager Instance()
     {
@@ -114,10 +120,16 @@ public class GameManager : MonoBehaviour
 
             case 3:
                 _maxCardCount = 20;
-                int[] randData_3 = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8 };
+                int[] randData_3 = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 };
                 randData = randData_3;
                 break;
         }
+
+        //값들이 유효한지 검사합니다.
+        Debug.Assert(_maxCardCount % 2 == 0);                               //짝이 맞아야 합니다.
+        Debug.Assert(_maxCardCount == randData.Length);                     //배열의 크기가 충분해야 합니다.
+        Debug.Assert(cardIndexNumber <= _cardScriptableArray.Length);       //카드의 종류가 최대치를 넘어서선 안됩니다.
+
         randData = randData.OrderBy(items => Random.Range(-1.0f, 1.0f)).ToArray();
         for (int i = 0; i < _maxCardCount; i++)
         {
@@ -176,4 +188,10 @@ public class GameManager : MonoBehaviour
     {
 
     }
+
+    public bool IsAvailableCardIndex(int cardIndex)
+    {
+        return cardIndex != Card.INVALID_CARD_INDEX && cardIndex < cardIndexNumber;
+    }
+
 }
