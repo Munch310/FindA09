@@ -59,12 +59,13 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.6f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\startBtn.cs" />
     <Compile Include="Assets\Scripts\SafeArea.cs" />
     <Compile Include="Assets\Scripts\CardData\CardScriptable.cs" />
-    <Compile Include="Assets\Scripts\StartBtn.cs" />
+    <Compile Include="Assets\Scripts\stageBtn.cs" />
     <Compile Include="Assets\Scripts\StageLoader.cs" />
-    <Compile Include="Assets\Scripts\StageBtn.cs" />
     <Compile Include="Assets\Scripts\ReturnMainBtn.cs" />
   </ItemGroup>
   <ItemGroup>
