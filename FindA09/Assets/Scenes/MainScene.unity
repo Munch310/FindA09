@@ -548,21 +548,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc6b337979f55d249a37195f0462a60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstCard: {fileID: 0}
-  _secondCard: {fileID: 0}
-  _timeText: {fileID: 790608325}
-  _countText: {fileID: 1398154196}
-  _time: 60
-  _score: 0
-  _count: 0
-  _cardPrefab: {fileID: 2247238943116812300, guid: be34636201c62f348ae8c27b30c7d455, type: 3}
-  _cardParentTransform: {fileID: 0}
-  _stage1: {fileID: 1832829903}
-  _stage2: {fileID: 1726303994}
-  _stage3: {fileID: 1479461877}
-  _cardScriptable: {fileID: 11400000, guid: 4a309cbd89afcea458833e09b4d6eafa, type: 2}
-  _stageData: {fileID: 11400000, guid: ce262522e679af949b92dda6e345cbf1, type: 2}
-  _gameOverUI: {fileID: 0}
 --- !u!4 &345652974
 Transform:
   m_ObjectHideFlags: 0

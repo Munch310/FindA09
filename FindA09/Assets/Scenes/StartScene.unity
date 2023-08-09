@@ -927,7 +927,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &702547083
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1231,6 +1231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e5ffa7af924b24f8af0706e9dd9f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StageSelect: {fileID: 702547082}
 --- !u!1 &1191571447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,6 +1394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbd864edf206dc458bdd25f1a9441fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StageSelect: {fileID: 702547082}
 --- !u!1 &1450095554
 GameObject:
   m_ObjectHideFlags: 0
