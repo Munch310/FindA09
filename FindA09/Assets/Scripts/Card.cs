@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class Card : MonoBehaviour
 
     public const int    INVALID_CARD_INDEX = -1;
 
-    public const float  CARD_OPEN_DURATION = 1.0f;
+    public const float  CARD_OPEN_DURATION = 5.0f;
 
 
     public int      _cardIndex = Card.INVALID_CARD_INDEX;            //카드의 번호입니다. 이 값으로 카드를 구분, 각종 정보를 얻는 키값으로 사용합니다.
@@ -23,6 +24,7 @@ public class Card : MonoBehaviour
     private bool    _isOpen             = false;
     private bool    _isFlipAnimation    = false;
     private float   _openTime           = 0.0f;
+    private bool    _isMatching         = false;
 
 
     public int cardIndex { set { _cardIndex = value; UpdateCardIndex(); } get { return _cardIndex; } }
@@ -54,8 +56,7 @@ public class Card : MonoBehaviour
 
             _openTime = Time.time;
 
-            //GameManager.Instance().AddOpenCard(gameObject);
-            Debug.Log("GameManager에서 적합한 함수를 호출하도록 변경하세요.");
+            GameManager.instance.AddOpenCard(gameObject);
 
             //한번 오픈이 되었으면 뒷면에 변화를 줍니다.
             var backImage = _backImage.GetComponent<Image>();
@@ -64,6 +65,13 @@ public class Card : MonoBehaviour
 
         }
 
+    }
+
+    public void OnMatching()
+    {
+        _frontImage.gameObject.SetActive(false);
+        _backImage.gameObject.SetActive(false);
+        _isMatching = true;
     }
 
     private void Awake()
@@ -80,7 +88,6 @@ public class Card : MonoBehaviour
 
     private void Start()
     {
-        cardIndex = 2;
     }
 
     private void Update()
@@ -90,7 +97,7 @@ public class Card : MonoBehaviour
         //적합한 상태:
         //1.오픈 상태
         //2.뒤집히는 중이 아닐 때(뒤집힐 때에는 무시합니다)
-        if (isOpen && !isFlipAnimation)
+        if (!_isMatching && isOpen && !isFlipAnimation)
         {
 
             //카드가 오픈된지 일정시간이 경과 했으면 다시 뒤집습니다.
@@ -107,10 +114,10 @@ public class Card : MonoBehaviour
     private void UpdateCardIndex()
     {
 
-        Debug.Assert(GameManager.Instance().IsAvailableCardIndex(_cardIndex));
+        Debug.Assert(GameManager.instance.IsAvailableCardIndex(_cardIndex));
 
         var frontImage      = _frontImage.GetComponent<Image>();
-        frontImage.sprite   = GameManager.Instance().cardScriptable.array[_cardIndex]._sprite;
+        frontImage.sprite   = GameManager.instance.cardScriptable.array[_cardIndex]._sprite;
         Debug.Assert(frontImage.sprite != null);
         
     }

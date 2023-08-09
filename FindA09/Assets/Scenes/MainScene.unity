@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 65836757}
   - component: {fileID: 65836759}
   - component: {fileID: 65836758}
+  - component: {fileID: 65836760}
   m_Layer: 5
   m_Name: FailTxt
   m_TagString: Untagged
@@ -174,14 +175,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.16509432, b: 0.16509432, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: bb966f973b1d72444ad31a0c390e9c1c, type: 3}
+    m_Font: {fileID: 12800000, guid: 0c80fbda2fe7feb4ba90469d56e5d2c6, type: 3}
     m_FontSize: 80
     m_FontStyle: 1
     m_BestFit: 0
@@ -202,6 +203,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65836756}
   m_CullTransparentMesh: 1
+--- !u!114 &65836760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65836756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4b96a9dedcec8438701156ed9e7a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 65836758}
+  _duration: 1.5
 --- !u!1 &117205407
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,13 +511,13 @@ RectTransform:
   m_Children:
   - {fileID: 790608324}
   - {fileID: 1398154195}
+  - {fileID: 1832829904}
+  - {fileID: 1726303995}
+  - {fileID: 1479461878}
   - {fileID: 845325780}
   - {fileID: 1512367051}
   - {fileID: 723195904}
   - {fileID: 65836757}
-  - {fileID: 1832829904}
-  - {fileID: 1726303995}
-  - {fileID: 1479461878}
   - {fileID: 745784319}
   m_Father: {fileID: 170401580}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -631,6 +646,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc6b337979f55d249a37195f0462a60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeText: {fileID: 790608325}
+  _countText: {fileID: 1398154196}
+  _matchingSuccessTextArray:
+  - {fileID: 845325783}
+  - {fileID: 723195907}
+  - {fileID: 1512367054}
+  _matchingFailureText: {fileID: 65836760}
+  _gameOverUI: {fileID: 745784318}
+  _cardPrefab: {fileID: 2247238943116812300, guid: be34636201c62f348ae8c27b30c7d455, type: 3}
+  _stage1: {fileID: 1832829903}
+  _stage2: {fileID: 1726303994}
+  _stage3: {fileID: 1479461877}
+  _cardScriptable: {fileID: 11400000, guid: 4a309cbd89afcea458833e09b4d6eafa, type: 2}
+  _stageData: {fileID: 11400000, guid: ce262522e679af949b92dda6e345cbf1, type: 2}
 --- !u!4 &345652974
 Transform:
   m_ObjectHideFlags: 0
@@ -815,6 +844,7 @@ GameObject:
   - component: {fileID: 723195904}
   - component: {fileID: 723195906}
   - component: {fileID: 723195905}
+  - component: {fileID: 723195907}
   m_Layer: 5
   m_Name: LeeTxt
   m_TagString: Untagged
@@ -855,14 +885,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.9716981, g: 0.4995995, b: 0.5586118, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: bb966f973b1d72444ad31a0c390e9c1c, type: 3}
+    m_Font: {fileID: 12800000, guid: 0c80fbda2fe7feb4ba90469d56e5d2c6, type: 3}
     m_FontSize: 80
     m_FontStyle: 1
     m_BestFit: 0
@@ -883,6 +913,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 723195903}
   m_CullTransparentMesh: 1
+--- !u!114 &723195907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723195903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4b96a9dedcec8438701156ed9e7a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 723195905}
+  _duration: 3
 --- !u!1 &745784318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,7 +1101,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: bb966f973b1d72444ad31a0c390e9c1c, type: 3}
+    m_Font: {fileID: 12800000, guid: 0c80fbda2fe7feb4ba90469d56e5d2c6, type: 3}
     m_FontSize: 70
     m_FontStyle: 1
     m_BestFit: 0
@@ -1221,7 +1265,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 823839619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63e2ed93046e7a54287439040ef7808a, type: 3}
+  m_Script: {fileID: 11500000, guid: 6facc866a29a4f440be20eb41a6d5999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &836901472
@@ -1310,6 +1354,7 @@ GameObject:
   - component: {fileID: 845325780}
   - component: {fileID: 845325782}
   - component: {fileID: 845325781}
+  - component: {fileID: 845325783}
   m_Layer: 5
   m_Name: MoonTxt
   m_TagString: Untagged
@@ -1350,14 +1395,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.85882354, g: 0.85882354, b: 0.85882354, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: bb966f973b1d72444ad31a0c390e9c1c, type: 3}
+    m_Font: {fileID: 12800000, guid: 0c80fbda2fe7feb4ba90469d56e5d2c6, type: 3}
     m_FontSize: 80
     m_FontStyle: 1
     m_BestFit: 0
@@ -1378,6 +1423,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845325779}
   m_CullTransparentMesh: 1
+--- !u!114 &845325783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845325779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4b96a9dedcec8438701156ed9e7a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 845325781}
+  _duration: 3
 --- !u!1 &949730428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1739,7 +1798,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: bb966f973b1d72444ad31a0c390e9c1c, type: 3}
+    m_Font: {fileID: 12800000, guid: 0c80fbda2fe7feb4ba90469d56e5d2c6, type: 3}
     m_FontSize: 60
     m_FontStyle: 1
     m_BestFit: 0
@@ -1831,6 +1890,7 @@ GameObject:
   - component: {fileID: 1512367051}
   - component: {fileID: 1512367053}
   - component: {fileID: 1512367052}
+  - component: {fileID: 1512367054}
   m_Layer: 5
   m_Name: KimTxt
   m_TagString: Untagged
@@ -1871,14 +1931,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.2216981, g: 1, b: 0.8054245, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: bb966f973b1d72444ad31a0c390e9c1c, type: 3}
+    m_Font: {fileID: 12800000, guid: 0c80fbda2fe7feb4ba90469d56e5d2c6, type: 3}
     m_FontSize: 80
     m_FontStyle: 1
     m_BestFit: 0
@@ -1899,6 +1959,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512367050}
   m_CullTransparentMesh: 1
+--- !u!114 &1512367054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512367050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4b96a9dedcec8438701156ed9e7a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 1512367052}
+  _duration: 3
 --- !u!1 &1596224021
 GameObject:
   m_ObjectHideFlags: 0

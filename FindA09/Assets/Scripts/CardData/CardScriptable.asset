@@ -16,40 +16,48 @@ MonoBehaviour:
   - _index: 0
     _cardName: CardName0
     _desc: Desc0
-    _sprite: {fileID: 21300000, guid: 7e61bc2c261ae904282c63ec2334e9d3, type: 3}
+    _sprite: {fileID: 21300000, guid: 176e9509764e1204fa11385e169674b2, type: 3}
   - _index: 1
     _cardName: CardName1
     _desc: Desc1
-    _sprite: {fileID: 21300000, guid: 7e61bc2c261ae904282c63ec2334e9d3, type: 3}
+    _sprite: {fileID: 21300000, guid: 38b9246379152414eacb7b8eef28a4b2, type: 3}
   - _index: 2
     _cardName: CardName2
     _desc: Desc2
-    _sprite: {fileID: 21300000, guid: 7e61bc2c261ae904282c63ec2334e9d3, type: 3}
+    _sprite: {fileID: 21300000, guid: af1114256c3febb43ae4d72cd168575f, type: 3}
   - _index: 3
     _cardName: CardName3
     _desc: Desc3
-    _sprite: {fileID: 21300000, guid: 7e61bc2c261ae904282c63ec2334e9d3, type: 3}
+    _sprite: {fileID: 21300000, guid: 3581e899aa482f1419801a7bd05f6deb, type: 3}
   - _index: 4
     _cardName: CardName4
     _desc: Desc4
-    _sprite: {fileID: 21300000, guid: 7e61bc2c261ae904282c63ec2334e9d3, type: 3}
+    _sprite: {fileID: 21300000, guid: a5707d342967c5b44b27ce2b3de64b7c, type: 3}
   - _index: 5
     _cardName: CardName5
     _desc: Desc5
-    _sprite: {fileID: 21300000, guid: 7e61bc2c261ae904282c63ec2334e9d3, type: 3}
+    _sprite: {fileID: 21300000, guid: 2688382c727c3254cb43e3494560dd2c, type: 3}
   - _index: 6
     _cardName: CardName6
     _desc: Desc6
-    _sprite: {fileID: 21300000, guid: 7e61bc2c261ae904282c63ec2334e9d3, type: 3}
+    _sprite: {fileID: 21300000, guid: 5367512f8d2d7a548a8c893d78375f1f, type: 3}
   - _index: 7
     _cardName: CardName7
     _desc: Desc7
-    _sprite: {fileID: 21300000, guid: 7e61bc2c261ae904282c63ec2334e9d3, type: 3}
+    _sprite: {fileID: 21300000, guid: 31685c1881898d34b9d223b3c0c3c9f8, type: 3}
   - _index: 8
     _cardName: CardName8
     _desc: Desc8
-    _sprite: {fileID: 21300000, guid: 7e61bc2c261ae904282c63ec2334e9d3, type: 3}
+    _sprite: {fileID: 21300000, guid: ea6dbd8f7c7056640800cb7cd732ce36, type: 3}
   - _index: 9
     _cardName: CardName9
     _desc: Desc9
-    _sprite: {fileID: 21300000, guid: 7e61bc2c261ae904282c63ec2334e9d3, type: 3}
+    _sprite: {fileID: 21300000, guid: 4aa2a11913db75248adabd919f1287b1, type: 3}
+  - _index: 10
+    _cardName: CardName10
+    _desc: Desc10
+    _sprite: {fileID: 21300000, guid: 0986ce586de4b514097099ced0707763, type: 3}
+  - _index: 11
+    _cardName: CardName11
+    _desc: Desc11
+    _sprite: {fileID: 21300000, guid: 074eedeb347d77c4aa7e69f7a4d9487d, type: 3}

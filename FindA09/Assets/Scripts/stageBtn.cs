@@ -6,7 +6,7 @@ public class StageBtn : MonoBehaviour
 
     public void StageSetActive()
     {
-        StageSelect.SetActive(!StageSelect.active);
+        StageSelect.SetActive(!StageSelect.activeSelf);
     }
 
 }

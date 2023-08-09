@@ -7,31 +7,33 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager _instance;
+    private static GameManager _instance = null;
+    public static GameManager instance { get { return _instance; } }
 
-    public GameObject _firstCard;
-    public GameObject _secondCard;
 
-    public Text _timeText;
-    public Text _countText;
-    public float _time = 60.0f;
-    public int _score = 0;
-    public int _count = 0;
+    private GameObject _firstCard;
 
-    public GameObject _cardPrefab;
-    public Transform _cardParentTransform;
+    public Text                 _timeText                       = null;
+    public Text                 _countText                      = null;
+    public TextMessage[]        _matchingSuccessTextArray       = new TextMessage[3];
+    public TextMessage          _matchingFailureText            = null;
+    public GameObject           _gameOverUI                     = null;
+    private float               _time                           = 60.0f;
+    private int                 _score                          = 0;
+    private int                 _count                          = 0;
+    private int                 _matchingCount                  = 0;
 
-    public GameObject _stage1;
-    public GameObject _stage2;
-    public GameObject _stage3;
+    public  GameObject   _cardPrefab             = null;
+    private Transform    _cardParentTransform    = null;
 
-    public CardScriptable _cardScriptable    = null;
-    public StageData      _stageData       = null;
+    public GameObject _stage1   = null;
+    public GameObject _stage2   = null;
+    public GameObject _stage3   = null;
+
+    public CardScriptable _cardScriptable       = null;
+    public StageData      _stageData            = null;
     
-    private bool[] isClearStage = { false, false, false };
 
-
-    public GameObject _gameOverUI;
 
 
     public CardScriptable   cardScriptable { get { return _cardScriptable; } }
@@ -40,34 +42,95 @@ public class GameManager : MonoBehaviour
     public int maxCurrentStageCardNumber { get { return _stageData.array[Global.Instance.CurrentStage].cardNumber; } }
     public int cardIndexNumber { get { return maxCurrentStageCardNumber / 2; } }            //카드 인덱스의 종류
 
-    public static GameManager Instance()
+    public void NextStage()
     {
-        if (!_instance)
-        {
-            _instance = FindObjectOfType(typeof(GameManager)) as GameManager;
+        Global.Instance.CurrentStage = Mathf.Max(0, Mathf.Min(++Global.Instance.CurrentStage, _stageData.maxStage));
+        LoadStage();
+    }
 
-            if (_instance == null)
-                Debug.Log("No Singleton Objs");
+    public bool IsAvailableCardIndex(int cardIndex)
+    {
+        return cardIndex != Card.INVALID_CARD_INDEX && cardIndex < cardIndexNumber;
+    }
+
+    public void AddOpenCard(GameObject gameObject)
+    {
+
+        Debug.Assert(gameObject != null);
+
+        //이전에 기억한 카드와 동일한 카드면 무시합니다.
+        if (gameObject == _firstCard)
+        {
+            return;
+        }
+
+        //이전에 입력한 카드가 없으면 기억합니다.
+        if (_firstCard == null)
+        {
+            _firstCard = gameObject;
+        }
+        else
+        {
+
+            Card firstCardScript    = _firstCard.GetComponent<Card>();
+            Card secondCardScript   = gameObject.GetComponent<Card>();
+            Debug.Assert(firstCardScript != null);
+            Debug.Assert(secondCardScript != null);
+
+            //기억한 카드가 유효한 상태인지 검사합니다.
+            //유효한 상태
+            //1. 카드가 오픈 상태입니다.
+            //2. 카드의 상태가 변하는중(애니메이션 진행중)이 아니어야 합니다.
+            if (firstCardScript.isOpen && !firstCardScript.isFlipAnimation)
+            {
+
+                TextMessage textMessage = null;
+                if (firstCardScript.cardIndex == secondCardScript.cardIndex)
+                {
+
+                    firstCardScript.OnMatching();
+                    secondCardScript.OnMatching();
+
+                    _score += 10;
+
+                    ++_matchingCount;
+                    if (_matchingCount == cardIndexNumber)
+                    {
+                        _gameOverUI.SetActive(true);
+                    }
+
+                    textMessage = _matchingSuccessTextArray[firstCardScript.cardIndex % 3];
+
+                }
+                else
+                {
+                    
+                    firstCardScript.Flip();
+                    secondCardScript.Flip();
+
+                    textMessage = _matchingFailureText;
+
+                }
+
+                ++_count;
+                _firstCard = null;
+
+                textMessage.OnText();
+
+            }
+            else    //유효하지 않다면 기억된 카드를 버리고 새로 입력된 카드를 기억합니다.
+            {
+                _firstCard = gameObject;
+            }
 
         }
-        return _instance;
+
     }
 
     private void Awake()
     {
-        if (!_instance)
-            _instance = this;
-
-        if (_instance != this)
-            Destroy(gameObject);
-
-        Debug.Log(Global.Instance.CurrentStage);
-
-        LoadPlayerPrefs();
-        DontDestroyOnLoad(gameObject);
-
+        _instance = this;
         LoadStage();
-
     }
 
     private void Start()
@@ -78,7 +141,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         _time -= Time.deltaTime;
-        _timeText.text = _time.ToString("N2");
+        _timeText.text = $"{_time:N2}";
         _countText.text = $"Count : {_count}";
         if (_time <= 0)
         {
@@ -89,18 +152,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void LoadPlayerPrefs()
-    {
-        for (int i = 1; i < 4; i++)
-        {
-            if (PlayerPrefs.HasKey($"Stage{i}Clear"))
-            {
-                isClearStage[i - 1] = true;
-            }
-        }
-    }
-
-    public void CreateCard(int stageLevel)
+    private void CreateCard(int stageLevel)
     {
         if (_cardParentTransform.childCount != 0)
         {
@@ -121,23 +173,36 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < maxCurrentStageCardNumber; i++)
         {
+
             GameObject newCard = Instantiate(_cardPrefab);
             newCard.transform.SetParent(_cardParentTransform);
             newCard.transform.localScale = new Vector3(1, 1, 1);
+
+            Card cardScript = newCard.GetComponent<Card>();
+            Debug.Assert(cardScript != null);
+            cardScript.cardIndex = randData[i];
+
         }
 
     }
 
-    public void ResetStage()
+    private void ResetStage()
     {
-        _time = 60;
-        Time.timeScale = 1.0f;
+
+        _time           = 60;
+        _score          = 0;
+        _count          = 0;
+        _matchingCount  = 0;
+        
         _stage1.SetActive(false);
         _stage2.SetActive(false);
         _stage3.SetActive(false);
+
+        Time.timeScale = 1.0f;
+
     }
 
-    public void LoadStage()
+    private void LoadStage()
     {
         ResetStage();
         switch (Global.Instance.CurrentStage)
@@ -159,28 +224,6 @@ public class GameManager : MonoBehaviour
                 break;
         }
         CreateCard(Global.Instance.CurrentStage);
-    }
-
-    public void SelectStage(int stageLevel)
-    {
-        Global.Instance.CurrentStage = stageLevel;
-        SceneManager.LoadScene("MainScene");
-    }
-
-    public void NextStage()
-    {
-        Global.Instance.CurrentStage = Mathf.Max(0, Mathf.Min(++Global.Instance.CurrentStage, _stageData.maxStage));
-        LoadStage();
-    }
-
-    public void IsMatched()
-    {
-
-    }
-
-    public bool IsAvailableCardIndex(int cardIndex)
-    {
-        return cardIndex != Card.INVALID_CARD_INDEX && cardIndex < cardIndexNumber;
     }
 
 }
