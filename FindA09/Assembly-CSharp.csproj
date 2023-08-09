@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\CardData\StageData.cs" />
     <Compile Include="Assets\Scripts\StageSelectBtn.cs" />
     <Compile Include="Assets\Scripts\Global.cs" />
+    <Compile Include="Assets\Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\ReturnMainBtn.cs" />
   </ItemGroup>
   <ItemGroup>

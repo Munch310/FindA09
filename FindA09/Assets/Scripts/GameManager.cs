@@ -127,6 +127,8 @@ public class GameManager : MonoBehaviour
                     firstCardScript.Flip();
                     secondCardScript.Flip();
 
+                    _time -= 3.0f;
+
                     textMessage = _matchingFailureText;
 
                 }
