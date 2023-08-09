@@ -20,7 +20,6 @@ public class Card : MonoBehaviour
     public Image       _backImage      = null;
     public Animator    _animator       = null;
 
-    private bool    _isOpenedBefore     = false;
     private bool    _isOpen             = false;
     private bool    _isFlipAnimation    = false;
     private float   _openTime           = 0.0f;
@@ -59,7 +58,6 @@ public class Card : MonoBehaviour
             Debug.Log("GameManager에서 적합한 함수를 호출하도록 변경하세요.");
 
             //한번 오픈이 되었으면 뒷면에 변화를 줍니다.
-            _isOpenedBefore = true;
             var backImage = _backImage.GetComponent<Image>();
             backImage.color = Color.gray;
 
@@ -109,11 +107,10 @@ public class Card : MonoBehaviour
     private void UpdateCardIndex()
     {
 
-        Debug.Log(_cardIndex);
         Debug.Assert(GameManager.Instance().IsAvailableCardIndex(_cardIndex));
 
         var frontImage      = _frontImage.GetComponent<Image>();
-        frontImage.sprite   = GameManager.Instance().cardScriptableArray[_cardIndex]._sprite;
+        frontImage.sprite   = GameManager.Instance().cardScriptable.array[_cardIndex]._sprite;
         Debug.Assert(frontImage.sprite != null);
         
     }

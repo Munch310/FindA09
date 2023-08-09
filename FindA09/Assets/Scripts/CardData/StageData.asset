@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d1daf0f1486e1846a7c3a8415394ede, type: 3}
-  m_Name: CardScriptable0
+  m_Script: {fileID: 11500000, guid: c85745fe0becce0408650f8b76c56538, type: 3}
+  m_Name: StageData
   m_EditorClassIdentifier: 
-  _index: 0
-  _cardName: Card0
-  _desc: Test0
-  _sprite: {fileID: 21300000, guid: 031c3a997205ba64b9d41145be66d848, type: 3}
+  array:
+  - cardNumber: 12
+  - cardNumber: 16
+  - cardNumber: 20

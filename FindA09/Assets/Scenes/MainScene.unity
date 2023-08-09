@@ -437,7 +437,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 174365159}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ca086d658bf8fd43b37f9d095bcce6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 58997d9bb2aefe24ab4e66822f44978f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &214320107
@@ -519,6 +519,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214320107}
   m_CullTransparentMesh: 1
+--- !u!1 &345652972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 345652974}
+  - component: {fileID: 345652973}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &345652973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345652972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc6b337979f55d249a37195f0462a60b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firstCard: {fileID: 0}
+  _secondCard: {fileID: 0}
+  _timeText: {fileID: 790608325}
+  _countText: {fileID: 1398154196}
+  _time: 60
+  _score: 0
+  _count: 0
+  _cardPrefab: {fileID: 2247238943116812300, guid: be34636201c62f348ae8c27b30c7d455, type: 3}
+  _cardParentTransform: {fileID: 0}
+  _stage1: {fileID: 1832829903}
+  _stage2: {fileID: 1726303994}
+  _stage3: {fileID: 1479461877}
+  _cardScriptable: {fileID: 11400000, guid: 4a309cbd89afcea458833e09b4d6eafa, type: 2}
+  _stageData: {fileID: 11400000, guid: ce262522e679af949b92dda6e345cbf1, type: 2}
+  _gameOverUI: {fileID: 0}
+--- !u!4 &345652974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345652972}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &545552866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,56 +1455,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206779339}
   m_CullTransparentMesh: 1
---- !u!1 &1368791583
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1368791585}
-  - component: {fileID: 1368791586}
-  m_Layer: 0
-  m_Name: StageLoader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1368791585
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1368791583}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 530.01556, y: 1670.6796, z: -34.32578}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1368791586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1368791583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c8f099d1f4e66544b4ad73d0b9ba0ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timeText: {fileID: 790608325}
-  _countText: {fileID: 1398154196}
-  _stage1: {fileID: 1832829903}
-  _stage2: {fileID: 1726303994}
-  _stage3: {fileID: 1479461877}
-  _gameFinishUI: {fileID: 745784318}
 --- !u!1 &1398154194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1993,4 +2002,4 @@ SceneRoots:
   - {fileID: 1596224024}
   - {fileID: 1738998216}
   - {fileID: 170401580}
-  - {fileID: 1368791585}
+  - {fileID: 345652974}

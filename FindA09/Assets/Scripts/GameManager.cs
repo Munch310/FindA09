@@ -24,21 +24,21 @@ public class GameManager : MonoBehaviour
     public GameObject _stage1;
     public GameObject _stage2;
     public GameObject _stage3;
-    public int _currentStage = 1;
 
-    public CardScriptable[] _cardScriptableArray = null;
+    public CardScriptable _cardScriptable    = null;
+    public StageData      _stageData       = null;
     
-    int _maxCardCount = 12;
-
     private bool[] isClearStage = { false, false, false };
 
 
     public GameObject _gameOverUI;
 
 
-    public CardScriptable[] cardScriptableArray { get { return _cardScriptableArray; } }
+    public CardScriptable   cardScriptable { get { return _cardScriptable; } }
+    public StageData        stageData { get { return _stageData; } }
 
-    public int cardIndexNumber { get { return _maxCardCount / 2; } }            //카드 인덱스의 종류
+    public int maxCurrentStageCardNumber { get { return _stageData.array[Global.Instance.CurrentStage].cardNumber; } }
+    public int cardIndexNumber { get { return maxCurrentStageCardNumber / 2; } }            //카드 인덱스의 종류
 
     public static GameManager Instance()
     {
@@ -61,8 +61,13 @@ public class GameManager : MonoBehaviour
         if (_instance != this)
             Destroy(gameObject);
 
+        Debug.Log(Global.Instance.CurrentStage);
+
         LoadPlayerPrefs();
         DontDestroyOnLoad(gameObject);
+
+        LoadStage();
+
     }
 
     private void Start()
@@ -103,40 +108,24 @@ public class GameManager : MonoBehaviour
                 Destroy(_cardParentTransform.GetChild(i).gameObject);
         }
 
-        int[] randData = { };
-        switch (stageLevel)
-        {
-            case 1:
-                _maxCardCount = 12;
-                int[] randData_1 = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5 };
-                randData = randData_1;
-                break;
-
-            case 2:
-                _maxCardCount = 16;
-                int[] randData_2 = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
-                randData = randData_2;
-                break;
-
-            case 3:
-                _maxCardCount = 20;
-                int[] randData_3 = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 };
-                randData = randData_3;
-                break;
-        }
-
         //값들이 유효한지 검사합니다.
-        Debug.Assert(_maxCardCount % 2 == 0);                               //짝이 맞아야 합니다.
-        Debug.Assert(_maxCardCount == randData.Length);                     //배열의 크기가 충분해야 합니다.
-        Debug.Assert(cardIndexNumber <= _cardScriptableArray.Length);       //카드의 종류가 최대치를 넘어서선 안됩니다.
+        Debug.Assert(cardIndexNumber <= _cardScriptable.array.Length);       //카드의 종류가 최대치를 넘어서선 안됩니다.
 
+        int[] randData = new int[maxCurrentStageCardNumber];
+        for(int i =0; i < cardIndexNumber; ++i)
+        {
+            randData[i * 2 + 0] = i;
+            randData[i * 2 + 1] = i;
+        }
         randData = randData.OrderBy(items => Random.Range(-1.0f, 1.0f)).ToArray();
-        for (int i = 0; i < _maxCardCount; i++)
+
+        for (int i = 0; i < maxCurrentStageCardNumber; i++)
         {
             GameObject newCard = Instantiate(_cardPrefab);
             newCard.transform.SetParent(_cardParentTransform);
             newCard.transform.localScale = new Vector3(1, 1, 1);
         }
+
     }
 
     public void ResetStage()
@@ -148,40 +137,40 @@ public class GameManager : MonoBehaviour
         _stage3.SetActive(false);
     }
 
-    public void LoadStage(int stageLevel)
+    public void LoadStage()
     {
         ResetStage();
-        _currentStage = stageLevel;
-        switch (stageLevel)
+        switch (Global.Instance.CurrentStage)
         {
-            case 1:
+            case 0:
                 _stage1.SetActive(true);
                 _cardParentTransform = _stage1.transform;
                 break;
-            case 2:
+            case 1:
                 _stage2.SetActive(true);
                 _cardParentTransform = _stage2.transform;
                 break;
-            case 3:
+            case 2:
                 _stage3.SetActive(true);
                 _cardParentTransform = _stage3.transform;
                 break;
+            default:
+                Debug.Assert(false);
+                break;
         }
-        CreateCard(stageLevel);
+        CreateCard(Global.Instance.CurrentStage);
     }
 
     public void SelectStage(int stageLevel)
     {
-        _currentStage = stageLevel;
+        Global.Instance.CurrentStage = stageLevel;
         SceneManager.LoadScene("MainScene");
     }
 
     public void NextStage()
     {
-        _currentStage++;
-        if (_currentStage == 3)
-            _currentStage = 3;
-        LoadStage(_currentStage);
+        Global.Instance.CurrentStage = Mathf.Max(0, Mathf.Min(++Global.Instance.CurrentStage, _stageData.maxStage));
+        LoadStage();
     }
 
     public void IsMatched()
