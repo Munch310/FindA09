@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\ResultTextUpdate.cs" />
     <Compile Include="Assets\Scripts\startBtn.cs" />
     <Compile Include="Assets\Scripts\SafeArea.cs" />
     <Compile Include="Assets\Scripts\CardData\CardScriptable.cs" />

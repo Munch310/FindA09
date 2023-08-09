@@ -56,12 +56,11 @@ public class Card : MonoBehaviour
 
             _openTime = Time.time;
 
-            GameManager.instance.AddOpenCard(gameObject);
-
             //한번 오픈이 되었으면 뒷면에 변화를 줍니다.
             var backImage = _backImage.GetComponent<Image>();
             backImage.color = Color.gray;
 
+            GameManager.instance.AddOpenCard(gameObject);
 
         }
 

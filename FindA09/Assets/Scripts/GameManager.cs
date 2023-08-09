@@ -14,14 +14,14 @@ public class GameManager : MonoBehaviour
     private GameObject _firstCard;
 
     public Text                 _timeText                       = null;
+    public Animator             _timeTextAnimator               = null;
     public Text                 _countText                      = null;
     public TextMessage[]        _matchingSuccessTextArray       = new TextMessage[3];
     public TextMessage          _matchingFailureText            = null;
     public GameObject           _gameClearUI                    = null;
     public GameObject           _gameFailureUI                  = null;
     private float               _time                           = 60.0f;
-    private int                 _score                          = 0;
-    private int                 _count                          = 0;
+    private int                 _tryCount                       = 0;
     private int                 _matchingCount                  = 0;
 
     public  GameObject   _cardPrefab             = null;
@@ -35,12 +35,25 @@ public class GameManager : MonoBehaviour
     public StageData      _stageData            = null;
     
 
+    public float time { get { return _time; } }
 
+    public int score { get { return (int)Mathf.Ceil(_time) * 100 + _matchingCount * 200 + Mathf.Min(maxRankTryCount - tryCount, 0) * -50; } }
+
+    public int tryCount { get { return _tryCount; } }
+
+    public int maxRankTryCount { get { return _tryCount * 3; } }
 
     public CardScriptable   cardScriptable { get { return _cardScriptable; } }
     public StageData        stageData { get { return _stageData; } }
 
-    public int maxCurrentStageCardNumber { get { return _stageData.array[Global.Instance.CurrentStage].cardNumber; } }
+    public StageData.STAGE_DATA currentStageData { get { return _stageData.array[Global.Instance.CurrentStage]; } }
+
+    public int maxCurrentStageCardNumber { get { return currentStageData.cardNumber; } }
+
+    public float maxCurrentStageTime { get { return currentStageData.time; } }
+
+    public float currentStageHurryUpTime { get { return maxCurrentStageTime * 0.5f; } }
+
     public int cardIndexNumber { get { return maxCurrentStageCardNumber / 2; } }            //카드 인덱스의 종류
 
     public void NextStage()
@@ -92,12 +105,17 @@ public class GameManager : MonoBehaviour
                     firstCardScript.OnMatching();
                     secondCardScript.OnMatching();
 
-                    _score += 10;
-
                     ++_matchingCount;
                     if (_matchingCount == cardIndexNumber)
                     {
+
+                        Time.timeScale = 0.0f;
+
                         _gameClearUI.SetActive(true);
+                        var resultTextUpdate = _gameClearUI.GetComponent<ResultTextUpdate>();
+                        Debug.Assert(resultTextUpdate != null);
+                        resultTextUpdate.UpdateText();
+
                     }
 
                     textMessage = _matchingSuccessTextArray[firstCardScript.cardIndex % 3];
@@ -113,7 +131,7 @@ public class GameManager : MonoBehaviour
 
                 }
 
-                ++_count;
+                ++_tryCount;
                 _firstCard = null;
 
                 textMessage.OnText();
@@ -143,14 +161,26 @@ public class GameManager : MonoBehaviour
     {
         _time -= Time.deltaTime;
         _timeText.text = $"{_time:N2}";
-        _countText.text = $"Count : {_count}";
+        _countText.text = $"Count : {_tryCount}";
+        
         if (_time <= 0)
         {
             _time = 0;
             Time.timeScale = 0.0f;
+            
             // 게임 오버
             _gameFailureUI.SetActive(true);
+            var resultTextUpdate = _gameFailureUI.GetComponent<ResultTextUpdate>();
+            Debug.Assert(resultTextUpdate);
+            resultTextUpdate.UpdateText();
+
         }
+
+        if (_time <= currentStageHurryUpTime)
+        {
+            _timeTextAnimator.SetBool("On", true);
+        }
+
     }
 
     private void CreateCard(int stageLevel)
@@ -190,9 +220,8 @@ public class GameManager : MonoBehaviour
     private void ResetStage()
     {
 
-        _time           = 60;
-        _score          = 0;
-        _count          = 0;
+        _time           = 0;
+        _tryCount          = 0;
         _matchingCount  = 0;
         
         _stage1.SetActive(false);
