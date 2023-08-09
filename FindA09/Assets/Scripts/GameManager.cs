@@ -234,8 +234,10 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void LoadStage()
+    public void LoadStage()
     {
+        _gameClearUI.SetActive(false);
+        _gameFailureUI.SetActive(false);
 
         ResetStage();
 

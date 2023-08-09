@@ -666,7 +666,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 523970495}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9474d64b95ae89d4da52843268fabd67, type: 3}
+  m_Script: {fileID: 11500000, guid: ba75438e91c75fe4680704475080ac8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &605424352
@@ -887,7 +887,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 625096647}
-        m_TargetAssemblyTypeName: StageSelectButton, Assembly-CSharp
+        m_TargetAssemblyTypeName: StageSelectBtn, Assembly-CSharp
         m_MethodName: SetStage
         m_Mode: 3
         m_Arguments:
@@ -907,7 +907,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 625096641}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9474d64b95ae89d4da52843268fabd67, type: 3}
+  m_Script: {fileID: 11500000, guid: ba75438e91c75fe4680704475080ac8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &702547082
@@ -2053,7 +2053,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1813595020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9474d64b95ae89d4da52843268fabd67, type: 3}
+  m_Script: {fileID: 11500000, guid: ba75438e91c75fe4680704475080ac8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1997925601
