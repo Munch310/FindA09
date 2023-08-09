@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   array:
   - cardNumber: 12
+    time: 100
   - cardNumber: 16
+    time: 70
   - cardNumber: 20
+    time: 75

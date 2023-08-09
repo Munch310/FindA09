@@ -9,7 +9,8 @@ public class StageData : ScriptableObject
     [System.Serializable]
     public struct STAGE_DATA
     {
-        public int cardNumber;
+        public int      cardNumber;
+        public float    time;
     }
 
     [SerializeField] public STAGE_DATA[] array = null;

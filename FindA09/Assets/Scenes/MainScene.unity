@@ -812,7 +812,8 @@ MonoBehaviour:
   - {fileID: 723195907}
   - {fileID: 1512367054}
   _matchingFailureText: {fileID: 65836760}
-  _gameOverUI: {fileID: 745784318}
+  _gameClearUI: {fileID: 745784318}
+  _gameFailureUI: {fileID: 975735052}
   _cardPrefab: {fileID: 2247238943116812300, guid: be34636201c62f348ae8c27b30c7d455, type: 3}
   _stage1: {fileID: 1832829903}
   _stage2: {fileID: 1726303994}

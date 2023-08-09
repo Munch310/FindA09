@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour
     public Text                 _countText                      = null;
     public TextMessage[]        _matchingSuccessTextArray       = new TextMessage[3];
     public TextMessage          _matchingFailureText            = null;
-    public GameObject           _gameOverUI                     = null;
+    public GameObject           _gameClearUI                    = null;
+    public GameObject           _gameFailureUI                  = null;
     private float               _time                           = 60.0f;
     private int                 _score                          = 0;
     private int                 _count                          = 0;
@@ -96,7 +97,7 @@ public class GameManager : MonoBehaviour
                     ++_matchingCount;
                     if (_matchingCount == cardIndexNumber)
                     {
-                        _gameOverUI.SetActive(true);
+                        _gameClearUI.SetActive(true);
                     }
 
                     textMessage = _matchingSuccessTextArray[firstCardScript.cardIndex % 3];
@@ -148,7 +149,7 @@ public class GameManager : MonoBehaviour
             _time = 0;
             Time.timeScale = 0.0f;
             // 게임 오버
-            _gameOverUI.SetActive(true);
+            _gameFailureUI.SetActive(true);
         }
     }
 
@@ -204,7 +205,9 @@ public class GameManager : MonoBehaviour
 
     private void LoadStage()
     {
+
         ResetStage();
+
         switch (Global.Instance.CurrentStage)
         {
             case 0:
@@ -223,7 +226,11 @@ public class GameManager : MonoBehaviour
                 Debug.Assert(false);
                 break;
         }
+
         CreateCard(Global.Instance.CurrentStage);
+
+        _time = _stageData.array[Global.Instance.CurrentStage].time;
+
     }
 
 }
