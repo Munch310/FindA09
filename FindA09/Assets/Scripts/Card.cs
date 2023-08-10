@@ -7,24 +7,24 @@ using UnityEngine.UI;
 public class Card : MonoBehaviour
 {
 
-    public const int INVALID_CARD_INDEX = -1;
+    public const int    INVALID_CARD_INDEX = -1;
 
-    public const float CARD_OPEN_DURATION = 5.0f;
-
-
-    public int _cardIndex = Card.INVALID_CARD_INDEX;            //카드의 번호입니다. 이 값으로 카드를 구분, 각종 정보를 얻는 키값으로 사용합니다.
+    public const float  CARD_OPEN_DURATION = 5.0f;
 
 
-    public GameObject _front = null;
-    public Image _frontImage = null;
-    public GameObject _back = null;
-    public Image _backImage = null;
-    public Animator _animator = null;
+    public int      _cardIndex = Card.INVALID_CARD_INDEX;            //카드의 번호입니다. 이 값으로 카드를 구분, 각종 정보를 얻는 키값으로 사용합니다.
 
-    private bool _isOpen = false;
-    private bool _isFlipAnimation = false;
-    private float _openTime = 0.0f;
-    private bool _isMatching = false;
+
+    public GameObject  _front          = null;
+    public Image       _frontImage     = null;
+    public GameObject  _back           = null;
+    public Image       _backImage      = null;
+    public Animator    _animator       = null;
+
+    private bool    _isOpen             = false;
+    private bool    _isFlipAnimation    = false;
+    private float   _openTime           = 0.0f;
+    private bool    _isMatching         = false;
 
 
     public int cardIndex { set { _cardIndex = value; UpdateCardIndex(); } get { return _cardIndex; } }
@@ -108,13 +108,13 @@ public class Card : MonoBehaviour
         {
 
             //카드가 오픈된지 일정시간이 경과 했으면 다시 뒤집습니다.
-            if (Time.time - _openTime > CARD_OPEN_DURATION)
+            if(Time.time -  _openTime > CARD_OPEN_DURATION)
             {
                 Flip();
             }
 
         }
-
+        
     }
 
 
@@ -123,10 +123,10 @@ public class Card : MonoBehaviour
 
         Debug.Assert(GameManager.instance.IsAvailableCardIndex(_cardIndex));
 
-        var frontImage = _frontImage.GetComponent<Image>();
-        frontImage.sprite = GameManager.instance.cardScriptable.array[_cardIndex]._sprite;
+        var frontImage      = _frontImage.GetComponent<Image>();
+        frontImage.sprite   = GameManager.instance.cardScriptable.array[_cardIndex]._sprite;
         Debug.Assert(frontImage.sprite != null);
-
+        
     }
 
 }
