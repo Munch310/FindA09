@@ -4,12 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEditor.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance = null;
     public static GameManager instance { get { return _instance; } }
 
+    public AudioClip correct;
+    public AudioClip inCorrect;
+    public AudioClip clearStage;
+    public AudioClip failStage;
+    public AudioSource audioSource;
+
+    public bool _isGameOver = false;
 
     private GameObject _firstCard;
 
@@ -116,12 +124,13 @@ public class GameManager : MonoBehaviour
                         Time.timeScale = 0.0f;
 
                         _gameClearUI.SetActive(true);
+                        audioSource.PlayOneShot(clearStage);
                         var resultTextUpdate = _gameClearUI.GetComponent<ResultTextUpdate>();
                         Debug.Assert(resultTextUpdate != null);
                         resultTextUpdate.UpdateText();
 
                     }
-
+                    audioSource.PlayOneShot(correct);
                     textMessage = _matchingSuccessTextArray[firstCardScript.cardIndex % 3];
 
                 }
@@ -132,7 +141,7 @@ public class GameManager : MonoBehaviour
                     secondCardScript.Flip();
 
                     _time -= 3.0f;
-
+                    audioSource.PlayOneShot(inCorrect);
                     textMessage = _matchingFailureText;
 
                 }
@@ -170,8 +179,9 @@ public class GameManager : MonoBehaviour
         {
 
             _time -= Time.deltaTime;
-            if (_time <= 0)
+            if (_time <= 0 && !_isGameOver)
             {
+                audioSource.PlayOneShot(failStage);
                 _time = 0;
                 Time.timeScale = 0.0f;
 
@@ -181,6 +191,7 @@ public class GameManager : MonoBehaviour
                 Debug.Assert(resultTextUpdate);
                 resultTextUpdate.UpdateText();
 
+                _isGameOver = true;
             }
 
             if (_time <= currentStageHurryUpTime)
