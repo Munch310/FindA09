@@ -13,6 +13,14 @@ public class GameManager : MonoBehaviour
 
     private GameObject _firstCard;
 
+    public AudioClip correctClip;
+    public AudioClip inCorrectClip;
+    public AudioClip clearStageClip;
+    public AudioClip failStageClip;
+    public AudioSource gmAudiosource;
+
+    private bool _isGameOver = false;
+
     public Text                 _timeText                       = null;
     public Animator             _timeTextAnimator               = null;
     public Text                 _countText                      = null;
@@ -115,13 +123,14 @@ public class GameManager : MonoBehaviour
 
                         Time.timeScale = 0.0f;
 
+                        gmAudiosource.PlayOneShot(clearStageClip); // 클리어 스테이지 소리
                         _gameClearUI.SetActive(true);
                         var resultTextUpdate = _gameClearUI.GetComponent<ResultTextUpdate>();
                         Debug.Assert(resultTextUpdate != null);
                         resultTextUpdate.UpdateText();
 
                     }
-
+                    gmAudiosource.PlayOneShot(correctClip); // 맞췄을 때 소리
                     textMessage = _matchingSuccessTextArray[firstCardScript.cardIndex % 3];
 
                 }
@@ -132,7 +141,7 @@ public class GameManager : MonoBehaviour
                     secondCardScript.Flip();
 
                     _time -= 3.0f;
-
+                    gmAudiosource.PlayOneShot(inCorrectClip); // 틀렸을 때 소리
                     textMessage = _matchingFailureText;
 
                 }
@@ -170,16 +179,18 @@ public class GameManager : MonoBehaviour
         {
 
             _time -= Time.deltaTime;
-            if (_time <= 0)
+            if (_time <= 0 && !_isGameOver)
             {
                 _time = 0;
                 Time.timeScale = 0.0f;
 
                 // 게임 오버
+                gmAudiosource.PlayOneShot(failStageClip); // 실패 스테이지 소리
                 _gameFailureUI.SetActive(true);
                 var resultTextUpdate = _gameFailureUI.GetComponent<ResultTextUpdate>();
                 Debug.Assert(resultTextUpdate);
                 resultTextUpdate.UpdateText();
+                _isGameOver = true;
 
             }
 
@@ -240,10 +251,12 @@ public class GameManager : MonoBehaviour
         _time           = 0;
         _tryCount          = 0;
         _matchingCount  = 0;
-        
+        _cardReadyCount = 0;
+
         _stage1.SetActive(false);
         _stage2.SetActive(false);
         _stage3.SetActive(false);
+        
 
         _timeTextAnimator.SetBool("On", false);
 
