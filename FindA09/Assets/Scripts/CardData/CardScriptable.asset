@@ -9,55 +9,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29eac28aee566f649a8a529b81775bfb, type: 3}
+  m_Script: {fileID: 11500000, guid: e9d590a9f8b80444484dfa23fa184dbd, type: 3}
   m_Name: CardScriptable
   m_EditorClassIdentifier: 
   array:
   - _index: 0
     _cardName: 
     _desc: 
-    _sprite: {fileID: 21300000, guid: 4b13b5a8f14fc864b958c11160391eba, type: 3}
+    _sprite: {fileID: 21300000, guid: 50b09a1693f812546a9adf6c28cff035, type: 3}
   - _index: 1
     _cardName: 
     _desc: 
-    _sprite: {fileID: 21300000, guid: 047bf5a732070c741bb6d6d2cfbcf44d, type: 3}
+    _sprite: {fileID: 21300000, guid: 963e30389cd978640a0422cf06d0a3e9, type: 3}
   - _index: 2
     _cardName: 
     _desc: 
-    _sprite: {fileID: 21300000, guid: 034e41fbfe3da734eb5d3be48f5116b3, type: 3}
+    _sprite: {fileID: 21300000, guid: 3773441d1b3376645bde953befaf22b3, type: 3}
   - _index: 3
     _cardName: 
     _desc: 
-    _sprite: {fileID: 21300000, guid: fdf6ed2119638ec4a9c7b5a7f3fcd85f, type: 3}
+    _sprite: {fileID: 21300000, guid: 7479fea973b475f44b7c94bdbeec11eb, type: 3}
   - _index: 4
     _cardName: 
     _desc: 
-    _sprite: {fileID: 21300000, guid: 461f429e3db82d942bbf6fee9a7628fc, type: 3}
+    _sprite: {fileID: 21300000, guid: 04da077e071d07949a946447e681bdcf, type: 3}
   - _index: 5
     _cardName: 
     _desc: 
-    _sprite: {fileID: 21300000, guid: e36802aad245abe40a36d579c5ebbace, type: 3}
+    _sprite: {fileID: 21300000, guid: 605c25461944e8f41988eeff3eeff4d1, type: 3}
   - _index: 6
     _cardName: 
     _desc: 
-    _sprite: {fileID: 21300000, guid: 578fb95605608fd4fbc5dacc3b09e861, type: 3}
+    _sprite: {fileID: 21300000, guid: 87c2349fbefc6754bb6cd923ba0e2f9f, type: 3}
   - _index: 7
     _cardName: 
     _desc: 
-    _sprite: {fileID: 21300000, guid: aab9a1c54e6e95143a588ddb3a2919d4, type: 3}
+    _sprite: {fileID: 21300000, guid: 1b49f1124ff4a65478fe484d21da01ab, type: 3}
   - _index: 8
     _cardName: 
     _desc: 
-    _sprite: {fileID: 21300000, guid: 1a2ab4aed6d3c9c45b5283fcd12c6971, type: 3}
+    _sprite: {fileID: 21300000, guid: 21f4ae0b67ad07546984aed473e769ec, type: 3}
   - _index: 9
     _cardName: 
     _desc: 
-    _sprite: {fileID: 21300000, guid: c1faae8b734a84849bc17aa3954f7834, type: 3}
+    _sprite: {fileID: 21300000, guid: e1cf3f005b92d5c40be8a2ad011e42a8, type: 3}
   - _index: 10
     _cardName: 
     _desc: 
-    _sprite: {fileID: 21300000, guid: ca5261646bcbb044291d4ee9aa9f4982, type: 3}
+    _sprite: {fileID: 21300000, guid: 90f221a148dc1f94f96e4c16250e9dea, type: 3}
   - _index: 11
     _cardName: 
     _desc: 
-    _sprite: {fileID: 21300000, guid: ca5261646bcbb044291d4ee9aa9f4982, type: 3}
+    _sprite: {fileID: 21300000, guid: ae141603b844b80438a5b7f2d1a290e8, type: 3}

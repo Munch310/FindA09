@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public Text                 _timeText                       = null;
     public Animator             _timeTextAnimator               = null;
     public Text                 _countText                      = null;
+    public Text                 _bestScoreText                  = null;
     public TextMessage[]        _matchingSuccessTextArray       = new TextMessage[3];
     public TextMessage          _matchingFailureText            = null;
     public GameObject           _gameClearUI                    = null;
@@ -120,15 +121,7 @@ public class GameManager : MonoBehaviour
                     ++_matchingCount;
                     if (_matchingCount == cardIndexNumber)
                     {
-
-                        Time.timeScale = 0.0f;
-
-                        gmAudiosource.PlayOneShot(clearStageClip); // 클리어 스테이지 소리
-                        _gameClearUI.SetActive(true);
-                        var resultTextUpdate = _gameClearUI.GetComponent<ResultTextUpdate>();
-                        Debug.Assert(resultTextUpdate != null);
-                        resultTextUpdate.UpdateText();
-
+                        GameClear();
                     }
                     gmAudiosource.PlayOneShot(correctClip); // 맞췄을 때 소리
                     textMessage = _matchingSuccessTextArray[firstCardScript.cardIndex % 3];
@@ -208,7 +201,27 @@ public class GameManager : MonoBehaviour
 
     public void ReadyCard()
     {
+
         ++_cardReadyCount;
+
+        //이번 카드가 마지막 카드였으면 단체로 뒤집습니다.
+        if (isStageReady)
+        {
+
+            for (int i = 0; i < _cardParentTransform.childCount; ++i)
+            {
+
+                var childTransform = _cardParentTransform.GetChild(i);
+
+                var childCardScript = childTransform.gameObject.GetComponent<Card>();
+                Debug.Assert(childCardScript != null);
+
+                childCardScript.Opening();
+
+            }
+
+        }
+
     }
 
     private void CreateCard(int stageLevel)
@@ -292,7 +305,41 @@ public class GameManager : MonoBehaviour
 
         CreateCard(Global.Instance.CurrentStage);
 
-        _time = _stageData.array[Global.Instance.CurrentStage].time;
+        _time           = _stageData.array[Global.Instance.CurrentStage].time;
+
+        string  bestScorePrefsKey = $"BestScore{Global.Instance.CurrentStage}";
+        int     bestScore = 0;
+        if (PlayerPrefs.HasKey(bestScorePrefsKey))
+        {
+            bestScore = PlayerPrefs.GetInt(bestScorePrefsKey);
+        }
+        _bestScoreText.text = $"Best score:{bestScore}";
+
+    }
+
+    private void GameClear()
+    {
+
+        Time.timeScale = 0.0f;
+
+        gmAudiosource.PlayOneShot(clearStageClip); // 클리어 스테이지 소리
+
+        _gameClearUI.SetActive(true);
+        var resultTextUpdate = _gameClearUI.GetComponent<ResultTextUpdate>();
+        Debug.Assert(resultTextUpdate != null);
+        resultTextUpdate.UpdateText();
+
+        string bestScorePrefsKey = $"BestScore{Global.Instance.CurrentStage}";
+        int    bestScore = 0;
+        if (PlayerPrefs.HasKey(bestScorePrefsKey))
+        {
+            bestScore = PlayerPrefs.GetInt(bestScorePrefsKey);
+        }
+
+        if (score > bestScore)
+        {
+            PlayerPrefs.SetInt(bestScorePrefsKey, score);
+        }
 
     }
 

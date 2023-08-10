@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7d120ce4797f37d4ebda3b0c5a5c6a9f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1eee03d2c2bdbff4684b8f8bcc93fe05, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -223,7 +223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2186981464053244402
 RectTransform:
   m_ObjectHideFlags: 0
@@ -339,7 +339,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2247238943116812300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb3ceea549ffa1b448f5419b8946e060, type: 3}
+  m_Script: {fileID: 11500000, guid: abfc21c8f131aa44f812e62fdf13454b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cardIndex: -1
@@ -358,7 +358,7 @@ Animator:
   m_GameObject: {fileID: 2247238943116812300}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d77455ca4bd7fcc48833b06ef5af764e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 953baf53ac84dff47b2b9b2af2819102, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -385,7 +385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5909794461952379336
 RectTransform:
   m_ObjectHideFlags: 0
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7353167920088033577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08deef55947b0024bbf3cf3424d4561b, type: 3}
+  m_Script: {fileID: 11500000, guid: 05a372513ff68324c8ebf63b9f2666bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxDistance: 300
+  _maxDistance: 1500

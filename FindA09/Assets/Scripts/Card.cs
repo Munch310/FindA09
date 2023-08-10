@@ -33,6 +33,10 @@ public class Card : MonoBehaviour
 
     public bool isFlipAnimation { get { return _isFlipAnimation; } }
 
+    public void Opening()
+    {
+        _animator.SetBool("IsOpening", true);
+    }
 
     public void Flip()
     {
