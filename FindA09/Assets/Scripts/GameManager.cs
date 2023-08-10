@@ -4,38 +4,45 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEditor.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance = null;
     public static GameManager instance { get { return _instance; } }
 
+    public bool _isGameOver = false;
+    public AudioClip correct;
+    public AudioClip inCorrect;
+    public AudioClip clearStage;
+    public AudioClip failStage;
+    public AudioSource audioSource;
 
     private GameObject _firstCard;
 
-    public Text                 _timeText                       = null;
-    public Animator             _timeTextAnimator               = null;
-    public Text                 _countText                      = null;
-    public TextMessage[]        _matchingSuccessTextArray       = new TextMessage[3];
-    public TextMessage          _matchingFailureText            = null;
-    public GameObject           _gameClearUI                    = null;
-    public GameObject           _gameFailureUI                  = null;
-    private float               _time                           = 60.0f;
-    private int                 _tryCount                       = 0;
-    private int                 _matchingCount                  = 0;
-    private int                 _cardReadyCount               = 0;       //준비 완료된 카드의 개수
+    public Text _timeText = null;
+    public Animator _timeTextAnimator = null;
+    public Text _countText = null;
+    public TextMessage[] _matchingSuccessTextArray = new TextMessage[3];
+    public TextMessage _matchingFailureText = null;
+    public GameObject _gameClearUI = null;
+    public GameObject _gameFailureUI = null;
+    private float _time = 60.0f;
+    private int _tryCount = 0;
+    private int _matchingCount = 0;
+    private int _cardReadyCount = 0;       //준비 완료된 카드의 개수
 
-    public GameObject   _cardPrefab             = null;
-    private Transform    _cardParentTransform    = null;
+    public GameObject _cardPrefab = null;
+    private Transform _cardParentTransform = null;
 
-    public GameObject _stage1   = null;
-    public GameObject _stage2   = null;
-    public GameObject _stage3   = null;
+    public GameObject _stage1 = null;
+    public GameObject _stage2 = null;
+    public GameObject _stage3 = null;
 
-    public CardScriptable _cardScriptable       = null;
-    public StageData      _stageData            = null;
+    public CardScriptable _cardScriptable = null;
+    public StageData _stageData = null;
 
-    
+
 
     public float time { get { return _time; } }
 
@@ -45,8 +52,8 @@ public class GameManager : MonoBehaviour
 
     public int maxRankTryCount { get { return _tryCount * 3; } }
 
-    public CardScriptable   cardScriptable { get { return _cardScriptable; } }
-    public StageData        stageData { get { return _stageData; } }
+    public CardScriptable cardScriptable { get { return _cardScriptable; } }
+    public StageData stageData { get { return _stageData; } }
 
     public StageData.STAGE_DATA currentStageData { get { return _stageData.array[Global.Instance.CurrentStage]; } }
 
@@ -90,8 +97,8 @@ public class GameManager : MonoBehaviour
         else
         {
 
-            Card firstCardScript    = _firstCard.GetComponent<Card>();
-            Card secondCardScript   = gameObject.GetComponent<Card>();
+            Card firstCardScript = _firstCard.GetComponent<Card>();
+            Card secondCardScript = gameObject.GetComponent<Card>();
             Debug.Assert(firstCardScript != null);
             Debug.Assert(secondCardScript != null);
 
@@ -116,23 +123,24 @@ public class GameManager : MonoBehaviour
                         Time.timeScale = 0.0f;
 
                         _gameClearUI.SetActive(true);
+                        audioSource.PlayOneShot(clearStage);
                         var resultTextUpdate = _gameClearUI.GetComponent<ResultTextUpdate>();
                         Debug.Assert(resultTextUpdate != null);
                         resultTextUpdate.UpdateText();
 
                     }
-
+                    audioSource.PlayOneShot(correct);
                     textMessage = _matchingSuccessTextArray[firstCardScript.cardIndex % 3];
 
                 }
                 else
                 {
-                    
+
                     firstCardScript.Flip();
                     secondCardScript.Flip();
 
                     _time -= 3.0f;
-
+                    audioSource.PlayOneShot(inCorrect);
                     textMessage = _matchingFailureText;
 
                 }
@@ -170,8 +178,10 @@ public class GameManager : MonoBehaviour
         {
 
             _time -= Time.deltaTime;
-            if (_time <= 0)
+            // Update가 계속 호출되어 타임이 0보다 작거나 같을때마다 아래 함수가 계속 호출-> isGameOver를 넣어 게임오버 한 번만 실행!
+            if (_time <= 0 && !_isGameOver)
             {
+                audioSource.PlayOneShot(failStage);
                 _time = 0;
                 Time.timeScale = 0.0f;
 
@@ -180,6 +190,7 @@ public class GameManager : MonoBehaviour
                 var resultTextUpdate = _gameFailureUI.GetComponent<ResultTextUpdate>();
                 Debug.Assert(resultTextUpdate);
                 resultTextUpdate.UpdateText();
+                _isGameOver = true;
 
             }
 
@@ -189,9 +200,9 @@ public class GameManager : MonoBehaviour
             }
 
         }
-        
-        _timeText.text      = $"{_time:N2}";
-        _countText.text     = $"Count : {_tryCount}";
+
+        _timeText.text = $"{_time:N2}";
+        _countText.text = $"Count : {_tryCount}";
 
     }
 
@@ -212,7 +223,7 @@ public class GameManager : MonoBehaviour
         Debug.Assert(cardIndexNumber <= _cardScriptable.array.Length);       //카드의 종류가 최대치를 넘어서선 안됩니다.
 
         int[] randData = new int[maxCurrentStageCardNumber];
-        for(int i =0; i < cardIndexNumber; ++i)
+        for (int i = 0; i < cardIndexNumber; ++i)
         {
             randData[i * 2 + 0] = i;
             randData[i * 2 + 1] = i;
@@ -237,10 +248,10 @@ public class GameManager : MonoBehaviour
     private void ResetStage()
     {
 
-        _time           = 0;
-        _tryCount          = 0;
-        _matchingCount  = 0;
-        
+        _time = 0;
+        _tryCount = 0;
+        _matchingCount = 0;
+
         _stage1.SetActive(false);
         _stage2.SetActive(false);
         _stage3.SetActive(false);
