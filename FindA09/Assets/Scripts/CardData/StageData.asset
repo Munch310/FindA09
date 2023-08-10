@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: StageData
   m_EditorClassIdentifier: 
   array:
-  - cardNumber: 2
-    time: 5
+  - cardNumber: 12
+    time: 80
   - cardNumber: 16
     time: 70
   - cardNumber: 20
