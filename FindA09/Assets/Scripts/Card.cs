@@ -39,6 +39,14 @@ public class Card : MonoBehaviour
         _animator.SetBool("IsOpen", !_animator.GetBool("IsOpen"));
     }
 
+    public void OnClick()
+    {
+        if (GameManager.instance.isStageReady && !_isFlipAnimation)
+        {
+            Flip();
+        }
+    }
+
     public void OnFlipAnimationStart()
     {
         _isFlipAnimation = true;

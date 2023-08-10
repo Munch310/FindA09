@@ -5,7 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
 
-    public float _maxDistance = 1000.0f;
+    public float _maxDistance;
 
     private float   _distance           = 0.0f;
     private float   _angle              = 0.0f;
@@ -44,10 +44,14 @@ public class Movement : MonoBehaviour
 
             if(_distance <= 5.0f)
             {
+
                 transform.localPosition = Vector3.zero;
                 _distance   = 0.0f;
                 _angle      = 0.0f;
                 _isArrieve  = true;
+
+                GameManager.instance.ReadyCard();
+
             }
 
         }

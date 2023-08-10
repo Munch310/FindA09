@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65cd0c7b4b8f74d4c9e958d06fae546e, type: 3}
+  m_Script: {fileID: 11500000, guid: c85745fe0becce0408650f8b76c56538, type: 3}
   m_Name: StageData
   m_EditorClassIdentifier: 
   array:
-  - cardNumber: 12
-    time: 30
+  - cardNumber: 2
+    time: 5
   - cardNumber: 16
-    time: 30
+    time: 70
   - cardNumber: 20
-    time: 30
+    time: 65

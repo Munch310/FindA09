@@ -727,7 +727,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: bb966f973b1d72444ad31a0c390e9c1c, type: 3}
+    m_Font: {fileID: 12800000, guid: 0c80fbda2fe7feb4ba90469d56e5d2c6, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
@@ -1228,10 +1228,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1108649554}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41e5ffa7af924b24f8af0706e9dd9f1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9538b2bab3deecd4891ae143b1e78a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageSelect: {fileID: 702547082}
+  StageSelect: {fileID: 0}
 --- !u!1 &1191571447
 GameObject:
   m_ObjectHideFlags: 0

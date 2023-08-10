@@ -23,8 +23,9 @@ public class GameManager : MonoBehaviour
     private float               _time                           = 60.0f;
     private int                 _tryCount                       = 0;
     private int                 _matchingCount                  = 0;
+    private int                 _cardReadyCount               = 0;       //준비 완료된 카드의 개수
 
-    public  GameObject   _cardPrefab             = null;
+    public GameObject   _cardPrefab             = null;
     private Transform    _cardParentTransform    = null;
 
     public GameObject _stage1   = null;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     public CardScriptable _cardScriptable       = null;
     public StageData      _stageData            = null;
+
     
 
     public float time { get { return _time; } }
@@ -55,6 +57,8 @@ public class GameManager : MonoBehaviour
     public float currentStageHurryUpTime { get { return maxCurrentStageTime * 0.5f; } }
 
     public int cardIndexNumber { get { return maxCurrentStageCardNumber / 2; } }            //카드 인덱스의 종류
+
+    public bool isStageReady { get { return _cardReadyCount == maxCurrentStageCardNumber; } }
 
     public void NextStage()
     {
@@ -161,28 +165,39 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        _time -= Time.deltaTime;
-        _timeText.text = $"{_time:N2}";
-        _countText.text = $"Count : {_tryCount}";
+
+        if (isStageReady)
+        {
+
+            _time -= Time.deltaTime;
+            if (_time <= 0)
+            {
+                _time = 0;
+                Time.timeScale = 0.0f;
+
+                // 게임 오버
+                _gameFailureUI.SetActive(true);
+                var resultTextUpdate = _gameFailureUI.GetComponent<ResultTextUpdate>();
+                Debug.Assert(resultTextUpdate);
+                resultTextUpdate.UpdateText();
+
+            }
+
+            if (_time <= currentStageHurryUpTime)
+            {
+                _timeTextAnimator.SetBool("On", true);
+            }
+
+        }
         
-        if (_time <= 0)
-        {
-            _time = 0;
-            Time.timeScale = 0.0f;
-            
-            // 게임 오버
-            _gameFailureUI.SetActive(true);
-            var resultTextUpdate = _gameFailureUI.GetComponent<ResultTextUpdate>();
-            Debug.Assert(resultTextUpdate);
-            resultTextUpdate.UpdateText();
+        _timeText.text      = $"{_time:N2}";
+        _countText.text     = $"Count : {_tryCount}";
 
-        }
+    }
 
-        if (_time <= currentStageHurryUpTime)
-        {
-            _timeTextAnimator.SetBool("On", true);
-        }
-
+    public void ReadyCard()
+    {
+        ++_cardReadyCount;
     }
 
     private void CreateCard(int stageLevel)
@@ -229,6 +244,8 @@ public class GameManager : MonoBehaviour
         _stage1.SetActive(false);
         _stage2.SetActive(false);
         _stage3.SetActive(false);
+
+        _timeTextAnimator.SetBool("On", false);
 
         Time.timeScale = 1.0f;
 
